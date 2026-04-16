@@ -1,0 +1,170 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-service-linux
+spec:
+  selector:
+    app: my-access360-linux
+  #type: ClusterIP
+  type: LoadBalancer
+  ports:
+
+    - name: http-login
+      protocol: TCP
+      port: 4200
+      targetPort: 4200
+
+    - name: http-user
+      protocol: TCP
+      port: 4201
+      targetPort: 4201
+
+    - name: http-credential
+      protocol: TCP
+      port: 4202
+      targetPort: 4202
+
+    - name: http-access
+      protocol: TCP
+      port: 4203
+      targetPort: 4203
+
+    - name: http-loginapi
+      protocol: TCP
+      port: 5002
+      targetPort: 5002
+
+    - name: http-userapi
+      protocol: TCP
+      port: 5003
+      targetPort: 5003
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: sonar-service
+# spec:
+#   selector:
+#     app: my-sonar
+#   type: ClusterIP
+#   #type: LoadBalancer
+#   ports:
+
+#     - name: http-sonar
+#       protocol: TCP
+#       port: 9000
+#       targetPort: 9000
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: user-service
+# spec:
+#   selector:
+#     app: my-access360
+#   type: ClusterIP
+#   # type: LoadBalancer
+#   ports:
+
+#     - name: http-user
+#       protocol: TCP
+#       port: 4201
+#       targetPort: 4201
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: cred-service
+# spec:
+#   selector:
+#     app: my-access360
+#   type: ClusterIP
+#   # type: LoadBalancer
+#   ports:
+
+#     - name: http-cred
+#       protocol: TCP
+#       port: 4202
+#       targetPort: 4202
+
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: access-service
+# spec:
+#   selector:
+#     app: my-access360
+#   type: ClusterIP
+#   # type: LoadBalancer
+#   ports:
+
+#     - name: http-access
+#       protocol: TCP
+#       port: 4203
+#       targetPort: 4203
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: loginapi-service
+# spec:
+#   selector:
+#     app: my-access360
+#   type: ClusterIP
+#   # type: LoadBalancer
+#   ports:
+
+#     - name: http-loginapi
+#       protocol: TCP
+#       port: 5002
+#       targetPort: 5002
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: userapi-service
+# spec:
+#   selector:
+#     app: my-access360
+#   type: ClusterIP
+#   # type: LoadBalancer
+#   ports:
+
+#     - name: http-userapi
+#       protocol: TCP
+#       port: 5003
+#       targetPort: 5003
+
+
+
+    # - name: http-cred
+    #   protocol: TCP
+    #   port: 4202
+    #   targetPort: 4202
+
+    # - name: http-accesscontrol
+    #   protocol: TCP
+    #   port: 4203
+    #   targetPort: 4203
+
+    # - name: http-login-api
+    #   protocol: TCP
+    #   port: 5002
+    #   targetPort: 5002
+    # - name: http-user-api
+    #   protocol: TCP
+    #   port: 5003
+    #   targetPort: 5003
+

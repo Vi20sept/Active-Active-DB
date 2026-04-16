@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-access360-linux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-access360-linux
+  template:
+    metadata:
+      labels:
+        app: my-access360-linux
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: logincontainer02
+          image: terraacr01.azurecr.io/loginimage:$(tag)
+          ports:
+            # - containerPort: 443
+            - containerPort: 4200
+
+          # volumeMounts:
+          #   - name: ssl-certificates
+          #     mountPath: /etc/nginx/ssl # Mount SSL certificates at the expected path
+          #     readOnly: true
+          # env:
+          #   - name: NGINX_PORT
+          #     value: "443" # Pass the port as an environment variable
+
+          #   - name: NGINX_PORT_HTTP
+          #     value: "80"  # Define the HTTP port as an environment variable
+            
+
+        - name: usercontainer02
+          image: terraacr01.azurecr.io/userimage:$(taguser)
+          ports:
+            - containerPort: 4201
+
+        - name: credcontainer02
+          image: terraacr01.azurecr.io/credimage:$(tagcred)
+          ports:
+            - containerPort: 4202
+
+        - name: accesscontainer02
+          image: terraacr01.azurecr.io/accessimage:$(tagaccess)
+          ports:
+            - containerPort: 4203
+
+
+      #   - name: credentialcontainer02
+      #     image: access360.azurecr.io/credimage:$(tagcred)
+      #     ports:
+      #       - containerPort: 4202
+
+      #   - name: accesscontrolcontainer02
+      #     image: access360.azurecr.io/accesscontrolimage:$(tagaccesscontrol)
+      #     ports:
+      #       - containerPort: 4203
+
+        
+        - name: logincontainerapi02
+          image: terraacr01.azurecr.io/loginimageapi:$(tagloginapi)
+          ports:
+            - containerPort: 5002
+
+        - name: usercontainerapi02
+          image: terraacr01.azurecr.io/userimageapi:$(taguserapi)
+          ports:
+            - containerPort: 5003
+
+      # volumes:
+      #   - name: ssl-certificates
+      #     secret:
+      #       secretName: myapp-ssl-secret
+
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: my-sonar
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: my-sonar
+#   template:
+#     metadata:
+#       labels:
+#         app: my-sonar
+#     spec:
+
+      
+#       containers:
+#         - name: sonarcontainer02
+#           image: mypythonapp01.azurecr.io/soimage:latest
+#           ports:
+#             - containerPort: 9000
