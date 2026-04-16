@@ -11,33 +11,33 @@ spec:
 
     - name: http-login
       protocol: TCP
-      port: 4200
-      targetPort: 4200
+      port: 5000
+      targetPort: 5000
 
-    - name: http-user
-      protocol: TCP
-      port: 4201
-      targetPort: 4201
+    # - name: http-user
+    #   protocol: TCP
+    #   port: 4201
+    #   targetPort: 4201
 
-    - name: http-credential
-      protocol: TCP
-      port: 4202
-      targetPort: 4202
+    # - name: http-credential
+    #   protocol: TCP
+    #   port: 4202
+    #   targetPort: 4202
 
-    - name: http-access
-      protocol: TCP
-      port: 4203
-      targetPort: 4203
+    # - name: http-access
+    #   protocol: TCP
+    #   port: 4203
+    #   targetPort: 4203
 
-    - name: http-loginapi
-      protocol: TCP
-      port: 5002
-      targetPort: 5002
+    # - name: http-loginapi
+    #   protocol: TCP
+    #   port: 5002
+    #   targetPort: 5002
 
-    - name: http-userapi
-      protocol: TCP
-      port: 5003
-      targetPort: 5003
+    # - name: http-userapi
+    #   protocol: TCP
+    #   port: 5003
+    #   targetPort: 5003
 
 # ---
 # apiVersion: v1
