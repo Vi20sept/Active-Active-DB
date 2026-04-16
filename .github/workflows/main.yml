@@ -78,7 +78,7 @@ jobs:
       
   deploy:
     permissions:
-      actions: read
+      # actions: read
       contents: read
       # id-token: write
     runs-on: ubuntu-latest
