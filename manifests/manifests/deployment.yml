@@ -16,10 +16,10 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: logincontainer02
-          image: terraacr01.azurecr.io/loginimage:$(tag)
+          image: activedbcontainer.azurecr.io/loginimage
           ports:
             # - containerPort: 443
-            - containerPort: 4200
+            - containerPort: 5000
 
           # volumeMounts:
           #   - name: ssl-certificates
@@ -33,20 +33,20 @@ spec:
           #     value: "80"  # Define the HTTP port as an environment variable
             
 
-        - name: usercontainer02
-          image: terraacr01.azurecr.io/userimage:$(taguser)
-          ports:
-            - containerPort: 4201
+        # - name: usercontainer02
+        #   image: terraacr01.azurecr.io/userimage:$(taguser)
+        #   ports:
+        #     - containerPort: 4201
 
-        - name: credcontainer02
-          image: terraacr01.azurecr.io/credimage:$(tagcred)
-          ports:
-            - containerPort: 4202
+        # - name: credcontainer02
+        #   image: terraacr01.azurecr.io/credimage:$(tagcred)
+        #   ports:
+        #     - containerPort: 4202
 
-        - name: accesscontainer02
-          image: terraacr01.azurecr.io/accessimage:$(tagaccess)
-          ports:
-            - containerPort: 4203
+        # - name: accesscontainer02
+        #   image: terraacr01.azurecr.io/accessimage:$(tagaccess)
+        #   ports:
+        #     - containerPort: 4203
 
 
       #   - name: credentialcontainer02
@@ -60,15 +60,15 @@ spec:
       #       - containerPort: 4203
 
         
-        - name: logincontainerapi02
-          image: terraacr01.azurecr.io/loginimageapi:$(tagloginapi)
-          ports:
-            - containerPort: 5002
+        # - name: logincontainerapi02
+        #   image: terraacr01.azurecr.io/loginimageapi:$(tagloginapi)
+        #   ports:
+        #     - containerPort: 5002
 
-        - name: usercontainerapi02
-          image: terraacr01.azurecr.io/userimageapi:$(taguserapi)
-          ports:
-            - containerPort: 5003
+        # - name: usercontainerapi02
+        #   image: terraacr01.azurecr.io/userimageapi:$(taguserapi)
+        #   ports:
+        #     - containerPort: 5003
 
       # volumes:
       #   - name: ssl-certificates
