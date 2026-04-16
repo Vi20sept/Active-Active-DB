@@ -40,6 +40,7 @@ env:
   RESOURCE_GROUP: "vishal_dev_rg01"
   CLUSTER_NAME: "activedbcluster"
   DEPLOYMENT_MANIFEST_PATH: "manifests/manifests"
+  ACR_LOGIN_SERVER: "activedbcontainer.azurecr.io"
 
 jobs:
   buildImage:
@@ -74,17 +75,22 @@ jobs:
       # - name: Build and push image to ACR
       #   run: |
       #     az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-      - name: Login to ACR
+      # - name: Login to ACR
+      #   run: |
+      #     az acr login --name ${{ env.AZURE_CONTAINER_REGISTRY }}
+
+      - name: Docker Login to ACR
         run: |
-          az acr login --name ${{ env.AZURE_CONTAINER_REGISTRY }}
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login activedbcontainer.azurecr.io \
+            -u ${{ secrets.ACR_USERNAME }} --password-stdin
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }} .
+          docker build -t ${{ env.ACR_LOGIN_SERVER }}/${{ env.CONTAINER_NAME }}:${{ github.sha }} .
       
       - name: Push Docker Image
         run: |
-          docker push ${{ env.AZURE_CONTAINER_REGISTRY }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.CONTAINER_NAME }}:${{ github.sha }}
       
   deploy:
     permissions:
