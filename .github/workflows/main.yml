@@ -35,7 +35,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "activedbcontainer.azurecr.io"
+  AZURE_CONTAINER_REGISTRY: "activedbcontainer"
   CONTAINER_NAME: "nginx"
   RESOURCE_GROUP: "vishal_dev_rg01"
   CLUSTER_NAME: "activedbcluster"
@@ -56,6 +56,7 @@ jobs:
         uses: azure/login@v1.4.6
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
