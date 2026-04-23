@@ -140,4 +140,5 @@ jobs:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            $ACR_LOGIN_SERVER/loginimage:${{ github.sha }}
+            # $ACR_LOGIN_SERVER/loginimage:${{ github.sha }}
+            ${{ env.ACR_LOGIN_SERVER }}/loginimage:${{ github.sha }}
