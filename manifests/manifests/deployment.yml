@@ -20,6 +20,17 @@ spec:
           ports:
             # - containerPort: 443
             - containerPort: 5000
+          env:
+            - name: PRIMARY_DB
+              value: "failovergroupvishal.database.windows.net"
+            - name: SECONDARY_DB
+              value: "failovergroupvishal.secondary.database.windows.net"
+            - name: DB_USER
+              value: "sqladmin"
+            - name: DB_PASSWORD
+              value: "Password123!"
+            - name: DB_NAME
+              value: "sqldbvishal01"
 
           # volumeMounts:
           #   - name: ssl-certificates
