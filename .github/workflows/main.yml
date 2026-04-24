@@ -144,4 +144,4 @@ jobs:
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
             # ${{ env.ACR_LOGIN_SERVER }}/loginimage:${{ github.sha }}
-            ${{ env.ACR_LOGIN_SERVER }}/loginimage:v1-21
+            ${{ env.ACR_LOGIN_SERVER }}/loginimage:v1-23
