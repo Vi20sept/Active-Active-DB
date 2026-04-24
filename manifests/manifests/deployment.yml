@@ -1,3 +1,42 @@
+#Working deployment with hard-coded secrets
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: my-access360-linux
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: my-access360-linux
+#   template:
+#     metadata:
+#       labels:
+#         app: my-access360-linux
+#     spec:
+#       nodeSelector:
+#         "kubernetes.io/os": linux
+#       containers:
+#         - name: logincontainer02
+#           image: activedbcontainer.azurecr.io/loginimage
+#           ports:
+#             # - containerPort: 443
+#             - containerPort: 5000
+#           env:
+#             - name: PRIMARY_DB
+#               value: "failovergroupvishal.database.windows.net"
+#             - name: SECONDARY_DB
+#               value: "failovergroupvishal.secondary.database.windows.net"
+#             - name: DB_USER
+#               value: "sqladmin"
+#             - name: DB_PASSWORD
+#               value: "Password123!"
+#             - name: DB_NAME
+#               value: "sqldbvishal01"
+
+
+
+#Working deployment with Azure Key vault
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,89 +61,33 @@ spec:
             - containerPort: 5000
           env:
             - name: PRIMARY_DB
-              value: "failovergroupvishal.database.windows.net"
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: PRIMARY_DB
+          
             - name: SECONDARY_DB
-              value: "failovergroupvishal.secondary.database.windows.net"
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: SECONDARY_DB
+          
             - name: DB_USER
-              value: "sqladmin"
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_USER
+          
             - name: DB_PASSWORD
-              value: "Password123!"
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PASSWORD
+          
             - name: DB_NAME
-              value: "sqldbvishal01"
-
-          # volumeMounts:
-          #   - name: ssl-certificates
-          #     mountPath: /etc/nginx/ssl # Mount SSL certificates at the expected path
-          #     readOnly: true
-          # env:
-          #   - name: NGINX_PORT
-          #     value: "443" # Pass the port as an environment variable
-
-          #   - name: NGINX_PORT_HTTP
-          #     value: "80"  # Define the HTTP port as an environment variable
-            
-
-        # - name: usercontainer02
-        #   image: terraacr01.azurecr.io/userimage:$(taguser)
-        #   ports:
-        #     - containerPort: 4201
-
-        # - name: credcontainer02
-        #   image: terraacr01.azurecr.io/credimage:$(tagcred)
-        #   ports:
-        #     - containerPort: 4202
-
-        # - name: accesscontainer02
-        #   image: terraacr01.azurecr.io/accessimage:$(tagaccess)
-        #   ports:
-        #     - containerPort: 4203
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_NAME
 
 
-      #   - name: credentialcontainer02
-      #     image: access360.azurecr.io/credimage:$(tagcred)
-      #     ports:
-      #       - containerPort: 4202
-
-      #   - name: accesscontrolcontainer02
-      #     image: access360.azurecr.io/accesscontrolimage:$(tagaccesscontrol)
-      #     ports:
-      #       - containerPort: 4203
-
-        
-        # - name: logincontainerapi02
-        #   image: terraacr01.azurecr.io/loginimageapi:$(tagloginapi)
-        #   ports:
-        #     - containerPort: 5002
-
-        # - name: usercontainerapi02
-        #   image: terraacr01.azurecr.io/userimageapi:$(taguserapi)
-        #   ports:
-        #     - containerPort: 5003
-
-      # volumes:
-      #   - name: ssl-certificates
-      #     secret:
-      #       secretName: myapp-ssl-secret
-
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: my-sonar
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: my-sonar
-#   template:
-#     metadata:
-#       labels:
-#         app: my-sonar
-#     spec:
-
-      
-#       containers:
-#         - name: sonarcontainer02
-#           image: mypythonapp01.azurecr.io/soimage:latest
-#           ports:
-#             - containerPort: 9000
