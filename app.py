@@ -24,7 +24,7 @@ def get_connection(server):
 # 🔹 Health check
 @app.route("/")
 def home():
-    return "Flask Active-Active DB App Running!"
+    return "Flask Active-Active DB  Running!"
 
 # 🔹 Create table (run once)
 @app.route("/init")
