@@ -60,34 +60,34 @@ spec:
             # - containerPort: 443
             - containerPort: 5000
           env:
-            - name: PRIMARY_DB
+            - name: PRIMARYDB
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: PRIMARY_DB
+                  key: PRIMARYDB
           
-            - name: SECONDARY_DB
+            - name: SECONDARYDB
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: SECONDARY_DB
+                  key: SECONDARYDB
           
-            - name: DB_USER
+            - name: DBUSER
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: DB_USER
+                  key: DBUSER
           
-            - name: DB_PASSWORD
+            - name: DBPASSWORD
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: DB_PASSWORD
+                  key: DBPASSWORD
           
-            - name: DB_NAME
+            - name: DBNAME
               valueFrom:
                 secretKeyRef:
                   name: db-secret
-                  key: DB_NAME
+                  key: DBNAME
 
 
