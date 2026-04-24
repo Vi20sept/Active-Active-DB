@@ -5,19 +5,19 @@ import os
 
 app = Flask(__name__)
 
-PRIMARY_DB = os.getenv("PRIMARY_DB")
-SECONDARY_DB = os.getenv("SECONDARY_DB")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_NAME = os.getenv("DB_NAME")
+PRIMARY_DB = os.getenv("PRIMARYDB")
+SECONDARY_DB = os.getenv("SECONDARYDB")
+DB_USER = os.getenv("DBUSER")
+DB_PASSWORD = os.getenv("DBPASSWORD")
+DB_NAME = os.getenv("DBNAME")
 
 def get_connection(server):
     conn_str = f"""
         DRIVER={{ODBC Driver 17 for SQL Server}};
         SERVER={server};
-        DATABASE={DB_NAME};
-        UID={DB_USER};
-        PWD={DB_PASSWORD};
+        DATABASE={DBNAME};
+        UID={DBUSER};
+        PWD={DBPASSWORD};
     """
     return pyodbc.connect(conn_str)
 
@@ -30,7 +30,7 @@ def home():
 @app.route("/init")
 def init_db():
     try:
-        conn = get_connection(PRIMARY_DB)
+        conn = get_connection(PRIMARYDB)
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -61,7 +61,7 @@ def add_user():
     name = request.form.get("name")
 
     try:
-        conn = get_connection(PRIMARY_DB)
+        conn = get_connection(PRIMARYDB)
         cursor = conn.cursor()
 
         cursor.execute("INSERT INTO users (name) VALUES (?)", name)
@@ -75,7 +75,7 @@ def add_user():
 @app.route("/users", methods=["GET"])
 def get_users():
     try:
-        conn = get_connection(SECONDARY_DB)
+        conn = get_connection(SECONDARYDB)
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM users")
