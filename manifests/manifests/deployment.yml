@@ -55,7 +55,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
         - name: logincontainer02
-          image: activedbcontainer.azurecr.io/loginimage:v1-37
+          image: activedbcontainer.azurecr.io/loginimage:latest
           ports:
             # - containerPort: 443
             - containerPort: 5000
