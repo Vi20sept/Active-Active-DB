@@ -93,17 +93,17 @@ jobs:
           docker push $ACR_LOGIN_SERVER/loginimage:${{ env.VERSION }}
           
       # How to automatically update the image tag in deployment.yml    
-      # - name: Update deployment image tag
-      #   run: |
-      #     sed -i "s|image: activedbcontainer.azurecr.io/loginimage:.*|image: activedbcontainer.azurecr.io/loginimage:${{ env.VERSION }}|g" manifests/manifests/deployment.yml
+      - name: Update deployment image tag
+        run: |
+          sed -i "s|image: activedbcontainer.azurecr.io/loginimage:.*|image: activedbcontainer.azurecr.io/loginimage:${{ env.VERSION }}|g" manifests/manifests/deployment.yml
       
-      # - name: Commit and push changes
-      #   run: |
-      #     git config user.name "github-actions"
-      #     git config user.email "actions@github.com"
-      #     git add manifests/manifests/deployment.yml
-      #     git commit -m "Update image tag to ${{ env.VERSION }}"
-      #     git push
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add manifests/manifests/deployment.yml
+          git commit -m "Update image tag to ${{ env.VERSION }}"
+          git push
       
   # deploy:
   #   permissions:
