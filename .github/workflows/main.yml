@@ -46,7 +46,7 @@ env:
 jobs:
   buildImage:
     permissions:
-      contents: read
+      contents: write
       # id-token: write
     runs-on: ubuntu-latest
     steps:
