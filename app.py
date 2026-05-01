@@ -23,6 +23,7 @@ def get_connection(server):
 
 # 🔹 Health check
 # Added a feature branch done
+#Added one more comment
 @app.route("/")
 def home():
     return "Flask Active-Active DB App Running! pushed by feature branch previous was closed added one more user"
