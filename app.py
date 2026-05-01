@@ -22,9 +22,10 @@ def get_connection(server):
     return pyodbc.connect(conn_str)
 
 # 🔹 Health check
+# Added a feature branch
 @app.route("/")
 def home():
-    return "Flask Active-Active DB App Running!"
+    return "Flask Active-Active DB App Running! pushed by feature branch previous was closed"
 
 # 🔹 Create table (run once)
 @app.route("/init")
