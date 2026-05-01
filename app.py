@@ -25,7 +25,7 @@ def get_connection(server):
 # Added a feature branch
 @app.route("/")
 def home():
-    return "Flask Active-Active DB App Running! pushed by feature branch previous was closed"
+    return "Flask Active-Active DB App Running! pushed by feature branch previous was closed added one more user"
 
 # 🔹 Create table (run once)
 @app.route("/init")
