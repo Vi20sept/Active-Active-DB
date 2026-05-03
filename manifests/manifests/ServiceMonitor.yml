@@ -4,14 +4,15 @@ metadata:
   name: login-service-monitor
   namespace: monitoring
   labels:
-    release: monitoring   # 🔥 MUST match your helm install
+    release: monitoring
 spec:
   selector:
     matchLabels:
-      app: my-access360-linux   # 🔥 must match service selector
+      app: my-access360-linux
   namespaceSelector:
-    any: true
+    matchNames:
+      - default   # 👈 change if your app is elsewhere
   endpoints:
-    - port: http-login   # 🔥 MUST match your service port name
+    - port: http-login
       path: /metrics
       interval: 15s
