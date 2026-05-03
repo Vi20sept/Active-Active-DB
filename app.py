@@ -2,8 +2,16 @@
 from flask import Flask, request, jsonify
 import pyodbc
 import os
+from prometheus_client import Counter, generate_latest
+from flask import Response
 
 app = Flask(__name__)
+
+REQUEST_COUNT = Counter(
+    'http_requests_total',
+    'Total HTTP Requests',
+    ['method', 'endpoint', 'status']
+)
 
 PRIMARY_DB = os.getenv("PRIMARYDB")
 SECONDARY_DB = os.getenv("SECONDARYDB")
@@ -88,9 +96,22 @@ def get_users():
     except Exception as e:
         return str(e)
 
+
+@app.after_request
+def track_requests(response):
+    REQUEST_COUNT.labels(
+        request.method,
+        request.path,
+        response.status_code
+    ).inc()
+    return response
+
+@app.route('/metrics')
+def metrics():
+    return Response(generate_latest(), mimetype='text/plain')
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
 
 
 #Working for CosmosDb
