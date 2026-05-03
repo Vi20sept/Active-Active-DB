@@ -29,7 +29,7 @@ COPY requirements.txt .
 
 
 RUN pip install --upgrade pip \
-    && pip install gunicorn flask pyodbc
+    && pip install gunicorn flask pyodbc prometheus_client
     
 
 ENV PATH="/usr/local/bin:$PATH"
