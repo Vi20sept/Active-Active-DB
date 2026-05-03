@@ -102,7 +102,7 @@ def track_requests(response):
     REQUEST_COUNT.labels(
         request.method,
         request.path,
-        response.status_code
+        str(response.status_code)
     ).inc()
     return response
 
